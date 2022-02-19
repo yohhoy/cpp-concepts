@@ -1,6 +1,40 @@
 # C++ Standard concepts diagrams
 
 
+## Concept `convertible_to`
+https://timsong-cpp.github.io/cppwp/n4868/concept.convertible
+
+```mermaid
+graph TD
+    %% std::convertible_to<From, To>
+    is_convertible_v["is_convertible_v&lt;From, To&gt;"] --> convertible_to(["convertible_to&lt;From, To&gt;"]);
+    AC["requires (...) {...}"] --> convertible_to;
+```
+
+
+## Concept `common_reference_with`
+https://timsong-cpp.github.io/cppwp/n4868/concept.commonref
+
+```mermaid
+graph TD
+    %% std::common_reference_with<T, U>
+    same_as(["same_as&lt;COMREF(T,U), COMREF(U,T)&gt;"]) --> common_reference_with(["common_reference_with&lt;T, U&gt;"]);
+    convertible_to(["convertible_to&lt;T, COMREF(U,T)&gt;<br>convertible_to&lt;U, COMREF(U,T)&gt;"]) --> common_reference_with;
+```
+
+
+## Concept `common_with`
+https://timsong-cpp.github.io/cppwp/n4868/concept.common
+
+```mermaid
+graph TD
+    %% std::common_with<T, U>
+    same_as(["same_as&lt;CT(T,U), CT(U,T)&gt;"]) --> common_with(["common_with&lt;T, U&gt;"]);
+    AC["requires {...}"] --> common_with;
+    common_reference_with(["common_reference_with&lt;CLREF(T), CLREF(U)&gt;<br>common_reference_with&lt;CLREF(CT(T,U)), COMREF(CLREF(T),CLREF(U))&gt;"]) --> common_with;
+```
+
+
 ## Arithmetic concepts
 https://timsong-cpp.github.io/cppwp/n4868/concepts.arithmetic
 
