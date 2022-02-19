@@ -1,4 +1,4 @@
-# C++ Standard Concepts
+# C++ Standard concepts diagrams
 
 
 ## Arithmetic concepts
@@ -7,15 +7,40 @@ https://timsong-cpp.github.io/cppwp/n4868/concepts.arithmetic
 ```mermaid
 graph TD
     %% std::integral<T>
-    integral_v[integral_v] --> integral([integral]);
+    integral_v["integral_v&lt;T&gt;"] --> integral(["integral&lt;T&gt;"]);
     %% std::signed_integral<T>
-    integral --> signed_integral([signed_integral]);
-    is_signed_v[is_signed_v] --> signed_integral;
+    integral --> signed_integral(["signed_integral&lt;T&gt;"]);
+    is_signed_v["is_signed_v&lt;T&gt;"] --> signed_integral;
     %% std::unsigned_integral<T>
-    not_signed_v[!is_signed_v] --> unsigned_integral([unsigned_integral]);
+    not_signed_v["not is_signed_v&lt;T&gt;"] --> unsigned_integral(["unsigned_integral&lt;T&gt;"]);
     integral --> unsigned_integral;
     %% std::floating_point<T>
-    floating_point_v[floating_point_v] --> floating_point([floating_point])
+    floating_point_v["floating_point_v&lt;T&gt;"] --> floating_point(["floating_point&lt;T&gt;"]);
+```
+
+
+## Concept `assignable_from`
+https://timsong-cpp.github.io/cppwp/n4868/concept.assignable
+
+```mermaid
+graph TD
+    %% std::swappable<T>
+    AC1["is_lvalue_reference_v&lt;LHS&gt;"] --> swappable(["assignable_from&lt;LHS, RHS&gt;"]);
+    common_reference_with(["common_reference_with&lt;CREF(LHS), CREF(RHS)&gt;"]) --> swappable;
+    AC2["requires(LHS, RHS&amp;&amp;) {...}"] --> swappable;
+```
+
+
+## Concept `swappable`
+https://timsong-cpp.github.io/cppwp/n4868/concept.swappable
+
+```mermaid
+graph TD
+    %% std::swappable<T>
+    AC1["requires(T&amp;, T&amp;) {...}"] --> swappable(["swappable&lt;T&gt;"]);
+    %% std::swappable_with<T, U>
+    common_reference_with(["common_reference_with&lt;T, U&gt;"]) --> swappable_with(["swappable_with&lt;T, U&gt;"]);
+    AC2["requires(T&amp;&amp;, T&amp;&amp;) {...}"] --> swappable_with;
 ```
 
 
@@ -69,7 +94,7 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.copyconstructible
 ```mermaid
 graph TD
     %% std::copy_constructible<T>
-    move_constructible(["copy_constructible&lt;T&gt;"]) --> copy_constructible(["copy_constructible&lt;T&gt;"]);
+    move_constructible(["move_constructible&lt;T&gt;"]) --> copy_constructible(["copy_constructible&lt;T&gt;"]);
     constructible_from(["constructible_from&lt;T, T&amp;&gt;<br>constructible_from&lt;T, const T&amp;&gt;<br>constructible_from&lt;T, const T&gt;"]) --> copy_constructible;
     convertible_to(["convertible_to&lt;T&amp;, T&gt;<br>convertible_to&lt;const T&amp;, T&gt;<br>convertible_to&lt;const T, T&gt;"]) --> copy_constructible;
 ```
