@@ -8,7 +8,7 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.convertible
 graph TD
     %% std::convertible_to<From, To>
     is_convertible_v["is_convertible_v&lt;From, To&gt;"] --> convertible_to(["convertible_to&lt;From, To&gt;"]);
-    AC["requires (...) {...}"] --> convertible_to;
+    AC["requires(...) {...}"] --> convertible_to;
 ```
 
 
@@ -106,7 +106,7 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.default.init
 graph TD
     %% std::default_initializable<T>
     constructible_from(["constructible_from&lt;T&gt;"]) --> default_initializable(["default_initializable&lt;T&gt;"]);
-    AC1["requires{ T{}; }"] --> default_initializable;
+    AC1["requires {...}"] --> default_initializable;
     AC2["<i>is-default-initializable</i>&lt;T&gt;"] --> default_initializable;
 ```
 
@@ -142,7 +142,7 @@ graph TD
     %% std::boolean-testable<T>
     convertible_to(["convertible_to&lt;T, bool&gt;"]) --> impl(["<i>boolean-testable-impl</i>&lt;T&gt;"]);
     impl --> boolean_testable(["<i>boolean-testable</i>&lt;T&gt;"]);
-    AC["requires (T&amp;&amp;) {...}"] --> boolean_testable;
+    AC["requires(T&amp;&amp;) {...}"] --> boolean_testable;
 ```
 
 
