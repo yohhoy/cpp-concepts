@@ -81,18 +81,18 @@ https://timsong-cpp.github.io/cppwp/n4868/concepts#object
 ```mermaid
 graph TD
     %% std::movable<T>
-    is_object_v[is_object_v] --> movable([movable]);
-    move_constructible([move_constructible]) --> movable;
+    is_object_v["is_object_v&lt;T&gt;"] --> movable(["movable&lt;T&gt;"]);
+    move_constructible(["move_constructible&lt;T&gt;"]) --> movable;
     assignable_from1(["assignable_from&lt;T&amp;, T&gt;"]) --> movable;
-    swappable([swappable]) --> movable;
+    swappable(["swappable&lt;T&gt;"]) --> movable;
     %% std::copyable<T>
-    movable --> copyable;
-    copy_constructible([copy_constructible]) --> copyable([copyable]);
+    movable --> copyable(["copyable&lt;T&gt;"]);
+    copy_constructible(["copy_constructible&lt;T&gt;"]) --> copyable;
     assignable_from2(["assignable_from&lt;T&amp;, T&amp;&gt;<br>assignable_from&lt;T&amp;, const T&amp;&gt;<br>assignable_from&lt;T&amp;, const T&gt;"]) --> copyable;
     %% std::semiregular<T>
-    copyable --> semiregular([semiregular]);
-    default_initializable([default_initializable]) --> semiregular;
+    copyable --> semiregular(["semiregular&lt;T&gt;"]);
+    default_initializable(["default_initializable&lt;T&gt;"]) --> semiregular;
     %% std::regular<T>
-    semiregular --> regular([regular]);
-    equality_comparable([equality_comparable]) --> regular;
+    semiregular --> regular(["regular&lt;T&gt;"]);
+    equality_comparable(["equality_comparable&lt;T&gt;"]) --> regular;
 ```
