@@ -3,7 +3,7 @@
 ## Arithmetic concepts
 https://timsong-cpp.github.io/cppwp/n4868/concepts.arithmetic
 
-```marmaid
+```mermaid
 graph TD
     %% std::integral<T>
     integral_v[integral_v] --> integral([integral]);
@@ -20,7 +20,7 @@ graph TD
 ##  Object concepts
 https://timsong-cpp.github.io/cppwp/n4868/concepts#object
 
-```marmaid
+```mermaid
 graph TD
     %% std::movable<T>
     is_object_v[is_object_v] --> movable([movable]);
