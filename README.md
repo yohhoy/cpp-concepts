@@ -237,3 +237,23 @@ graph TD
     semiregular --> regular(["<b>regular&lt;T&gt;</b>"]);
     equality_comparable(["equality_comparable&lt;T&gt;"]) --> regular;
 ```
+
+
+## Concept `three_way_comparable` (`<compare>`)
+https://timsong-cpp.github.io/cppwp/n4868/cmp.concept
+
+```mermaid
+graph TD
+    %% std::three_way_comparable<T, Cat>
+    weakly-equality-comparable-with(["<i>weakly-equality-comparable-with&lt;T, T&gt;</i>"]) --> three_way_comparable(["<b>three_way_comparable&lt;T, Cat&gt;</b>"])
+    partially-ordered-with(["<i>partially-ordered-with&lt;T, T&gt;</i>"]) --> three_way_comparable
+    AC["requires(CREF(T), CREF(T)) {...}"] --> three_way_comparable
+```
+
+```mermaid
+graph TD
+    %% std::three_way_comparable_with<T, U, Cat>
+    three_way_comparable(["three_way_comparable&lt;T, Cat&gt;<br>three_way_comparable&lt;U, Cat&gt;<br>three_way_comparable&lt;COMREF(CREF(T), CREF(U)), Cat&gt;"]) --> three_way_comparable_with(["<b>three_way_comparable_with&lt;T, U, Cat&gt;</b>"])
+    common_reference_with(["common_reference_with&lt;CREF(T), CREF(T)&gt;"]) --> three_way_comparable_with
+    AC["requires(CREF(T), CREF(U)) {...}"] --> three_way_comparable_with
+```
