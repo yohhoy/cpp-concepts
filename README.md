@@ -6,7 +6,7 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.same
 
 ```mermaid
 graph TD
-    %% std::same-as-impl<T, U>
+    %% same-as-impl<T, U>
     AC1["is_same_v&lt;T, U&gt;"] --> impl1(["<i>same-as-impl</i>&lt;T, U&gt;"])
     AC2["is_same_v&lt;U, T&gt;"] --> impl2(["<i>same-as-impl</i>&lt;U, T&gt;"])
     %% std::same_as<T, U>
@@ -166,7 +166,7 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.booleantestable
 
 ```mermaid
 graph TD
-    %% std::boolean-testable<T>
+    %% boolean-testable<T>
     convertible_to(["convertible_to&lt;T, bool&gt;"]) --> impl(["<i>boolean-testable-impl</i>&lt;T&gt;"]);
     impl --> boolean_testable(["<b><i>boolean-testable</i>&lt;T&gt;</b>"]);
     AC["requires(T&amp;&amp;) {...}"] --> boolean_testable;
@@ -178,7 +178,7 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.equalitycomparable
 
 ```mermaid
 graph TD
-    %% std::weakly-equality-comparable-with<T, T>
+    %% weakly-equality-comparable-with<T, T>
     AC["requires(CREF(T), CREF(T)) {...}"] --> weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, T&gt;"]);
     %% std::equality_comparable<T>
     weakly-equality-comparable-with --> equality_comparable(["<b>equality_comparable&lt;T&gt;</b>"]);
@@ -186,7 +186,7 @@ graph TD
 
 ```mermaid
 graph TD
-    %% std::weakly-equality-comparable-with<T, U>
+    %% weakly-equality-comparable-with<T, U>
     AC["requires(CREF(T), CREF(U)) {...}"] --> weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, U&gt;"]);
     %% std::equality_comparable_with<T, U>
     equality_comparable(["equality_comparable&lt;T&gt;<br>equality_comparable&lt;U&gt;<br>equality_comparable&lt;COMREF(CREF(T), CREF(U))&gt;"]) --> equality_comparable_with(["<b>equality_comparable_with&lt;T, U&gt;</b>"]);
@@ -200,17 +200,21 @@ https://timsong-cpp.github.io/cppwp/n4868/concept.totallyordered
 
 ```mermaid
 graph TD
+    %% partially-ordered-with<T, T>
+    AC["requires(CREF(T), CREF(T)) {...}"] --> partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, T&gt;"]);
     %% std::totally_ordered<T>
     equality_comparable(["equality_comparable&lt;T&gt;"]) --> totally_ordered(["<b>totally_ordered&lt;T&gt;</b>"]);
-    pow(["<i>partially-ordered-with</i>&lt;T, T&gt;"]) --> totally_ordered;
+    partially-ordered-with --> totally_ordered;
 ```
 
 ```mermaid
 graph TD
+    %% partially-ordered-with<T, U>
+    AC["requires(CREF(T), CREF(U)) {...}"] --> partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, U&gt;"]);
     %% std::totally_ordered_with<T, U>
     totally_ordered(["totally_ordered&lt;T&gt;<br>totally_ordered&lt;U&gt;<br>totally_ordered&lt;COMREF(CREF(T), CREF(U))&gt;"]) --> totally_ordered_with(["<b>totally_ordered_with&lt;T, U&gt;</b>"]);
     equality_comparable_with(["equality_comparable_with&lt;T, U&gt;"]) --> totally_ordered_with;
-    pow(["<i>partially-ordered-with</i>&lt;T, U&gt;"]) --> totally_ordered_with;
+    partially-ordered-with --> totally_ordered_with;
 ```
 
 
@@ -309,22 +313,26 @@ https://timsong-cpp.github.io/cppwp/n4868/cmp.concept
 
 ```mermaid
 graph TD
-    %% std::weakly-equality-comparable-with<T, T>
-    AC1["requires(CREF(T), CREF(T)) {...}"] --> weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, T&gt;"]);
+    %% partially-ordered-with<T, T>
+    AC1["requires(CREF(T), CREF(T)) {...}"] --> partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, T&gt;"]);
+    %% weakly-equality-comparable-with<T, T>
+    AC2["requires(CREF(T), CREF(T)) {...}"] --> weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, T&gt;"]);
     %% std::three_way_comparable<T, Cat>
     weakly-equality-comparable-with --> three_way_comparable(["<b>three_way_comparable&lt;T, Cat&gt;</b>"])
-    partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, T&gt;"]) --> three_way_comparable
-    AC2["requires(CREF(T), CREF(T)) {...}"] --> three_way_comparable
+    partially-ordered-with --> three_way_comparable
+    AC3["requires(CREF(T), CREF(T)) {...}"] --> three_way_comparable
 ```
 
 ```mermaid
 graph TD
-    %% std::weakly-equality-comparable-with<T, U>
-    AC1["requires(CREF(T), CREF(U)) {...}"] --> weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, U&gt;"]);
+    %% partially-ordered-with<T, U>
+    AC1["requires(CREF(T), CREF(U)) {...}"] --> partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, U&gt;"]);
+    %% weakly-equality-comparable-with<T, U>
+    AC2["requires(CREF(T), CREF(U)) {...}"] --> weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, U&gt;"]);
     %% std::three_way_comparable_with<T, U, Cat>
     three_way_comparable(["three_way_comparable&lt;T, Cat&gt;<br>three_way_comparable&lt;U, Cat&gt;<br>three_way_comparable&lt;COMREF(CREF(T), CREF(U)), Cat&gt;"]) --> three_way_comparable_with(["<b>three_way_comparable_with&lt;T, U, Cat&gt;</b>"])
     common_reference_with(["common_reference_with&lt;CREF(T), CREF(U)&gt;"]) --> three_way_comparable_with
     weakly-equality-comparable-with --> three_way_comparable_with
-    partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, U&gt;"]) --> three_way_comparable_with
-    AC2["requires(CREF(T), CREF(U)) {...}"] --> three_way_comparable_with
+    partially-ordered-with --> three_way_comparable_with
+    AC3["requires(CREF(T), CREF(U)) {...}"] --> three_way_comparable_with
 ```
