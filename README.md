@@ -254,6 +254,8 @@ graph TD
 graph TD
     %% std::three_way_comparable_with<T, U, Cat>
     three_way_comparable(["three_way_comparable&lt;T, Cat&gt;<br>three_way_comparable&lt;U, Cat&gt;<br>three_way_comparable&lt;COMREF(CREF(T), CREF(U)), Cat&gt;"]) --> three_way_comparable_with(["<b>three_way_comparable_with&lt;T, U, Cat&gt;</b>"])
-    common_reference_with(["common_reference_with&lt;CREF(T), CREF(T)&gt;"]) --> three_way_comparable_with
+    common_reference_with(["common_reference_with&lt;CREF(T), CREF(U)&gt;"]) --> three_way_comparable_with
+    weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, U&gt;"]) --> three_way_comparable_with
+    partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, U&gt;"]) --> three_way_comparable_with
     AC["requires(CREF(T), CREF(U)) {...}"] --> three_way_comparable_with
 ```
