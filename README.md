@@ -1,6 +1,33 @@
 # C++ Standard concepts diagrams
 
 
+## Concept `same_as`
+https://timsong-cpp.github.io/cppwp/n4868/concept.same
+
+```mermaid
+graph TD
+    %% std::same-as-impl<T, U>
+    AC1["is_same_v&lt;T, U&gt;"] --> impl1(["<i>same-as-impl</i>&lt;T, U&gt;"])
+    AC2["is_same_v&lt;U, T&gt;"] --> impl2(["<i>same-as-impl</i>&lt;U, T&gt;"])
+    %% std::same_as<T, U>
+    impl1 --> same_as(["<b>same_as&lt;T, U&gt;</b>"]);
+    impl2 --> same_as;
+```
+Note: `same_as<T, U>` subsumes `same_as<U, T>`, and `same_as<U, T>` subsumes `same_as<T, U>` for the symmetric subsumption.
+
+
+## Concept `derived_from`
+https://timsong-cpp.github.io/cppwp/n4868/concept.derived
+
+```mermaid
+graph TD
+    %% std::derived_from<Derived, Base>
+    AC1["is_base_of_v&lt;Derived, Base&gt;"] --> derived_from(["<b>derived_from&lt;Derived, Base&gt;</b>"]);
+    AC2["is_convertible_v&lt;cv Derived*, cv Base*&gt;"] --> derived_from;
+```
+Note: cv = `const volatile`
+
+
 ## Concept `convertible_to`
 https://timsong-cpp.github.io/cppwp/n4868/concept.convertible
 
