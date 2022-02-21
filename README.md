@@ -217,7 +217,7 @@ graph TD
 
 
 ## Object concepts
-https://timsong-cpp.github.io/cppwp/n4868/concepts#object
+https://timsong-cpp.github.io/cppwp/n4868/concepts.object
 
 ```mermaid
 graph TD
@@ -239,14 +239,81 @@ graph TD
 ```
 
 
+## Concept `invocable`
+https://timsong-cpp.github.io/cppwp/n4868/concept.invocable
+
+```mermaid
+graph TD
+    %% std::invocable<F, Args...>
+    AC["requires(F&amp;&amp;, Args&amp;&amp;...) {...}"] --> invocable(["<b>invocable&lt;F, Args...&gt;</b>"]);
+```
+
+
+## Concept `regular_invocable`
+https://timsong-cpp.github.io/cppwp/n4868/concept.regularinvocable
+
+```mermaid
+graph TD
+    %% std::regular_invocable<F, Args...>
+    invocable(["invocable&lt;F, Args...&gt;"]) --> regular_invocable(["<b>regular_invocable&lt;F, Args...&gt;</b>"]);
+```
+Note: `regular_invocable` semantically imposes an _equality-preserving_ for `std::invoke` expression.
+
+
+## Concept `predicate`
+https://timsong-cpp.github.io/cppwp/n4868/concept.predicate
+
+```mermaid
+graph TD
+    %% std::predicate<F, Args...>
+    regular_invocable(["regular_invocable&lt;F, Args...&gt;"]) --> predicate(["<b>predicate&lt;F, Args...&gt;</b>"]);
+    boolean-testable(["<i>boolean-testable</i>&lt;invoke_result_t&lt;F, Args...&gt;&gt;"]) --> predicate;
+```
+
+
+## Concept `relation`
+https://timsong-cpp.github.io/cppwp/n4868/concept.relation
+
+```mermaid
+graph TD
+    %% std::relation<R, T, U>
+    predicate1(["predicate&lt;R, T, T&gt;"]) --> relation(["<b>relation&lt;R, T, U&gt;</b>"]);
+    predicate2(["predicate&lt;R, U, U&gt;"]) --> relation;
+    predicate3(["predicate&lt;R, T, U&gt;"]) --> relation;
+    predicate4(["predicate&lt;R, U, T&gt;"]) --> relation;
+```
+
+
+## Concept `equivalence_relation`
+https://timsong-cpp.github.io/cppwp/n4868/concept.equiv
+
+```mermaid
+graph TD
+    %% std::equivalence_relation<R, T, U>
+    predicate(["predicate&lt;R, T, U&gt;"]) --> equivalence_relation(["<b>equivalence_relation&lt;R, T, U&gt;</b>"]);
+```
+Note: `equivalence_relation` semantically imposes an _equivalence relation_.
+
+
+## Concept `strict_weak_order`
+https://timsong-cpp.github.io/cppwp/n4868/concept.strictweakorder
+
+```mermaid
+graph TD
+    %% std::strict_weak_order<R, T, U>
+    predicate(["predicate&lt;R, T, U&gt;"]) --> strict_weak_order(["<b>strict_weak_order&lt;R, T, U&gt;</b>"]);
+```
+Note: `strict_weak_order` semantically imposes a _strict weak ordering_.
+
+
 ## Concept `three_way_comparable` (`<compare>`)
 https://timsong-cpp.github.io/cppwp/n4868/cmp.concept
 
 ```mermaid
 graph TD
     %% std::three_way_comparable<T, Cat>
-    weakly-equality-comparable-with(["<i>weakly-equality-comparable-with&lt;T, T&gt;</i>"]) --> three_way_comparable(["<b>three_way_comparable&lt;T, Cat&gt;</b>"])
-    partially-ordered-with(["<i>partially-ordered-with&lt;T, T&gt;</i>"]) --> three_way_comparable
+    weakly-equality-comparable-with(["<i>weakly-equality-comparable-with</i>&lt;T, T&gt;"]) --> three_way_comparable(["<b>three_way_comparable&lt;T, Cat&gt;</b>"])
+    partially-ordered-with(["<i>partially-ordered-with</i>&lt;T, T&gt;"]) --> three_way_comparable
     AC["requires(CREF(T), CREF(T)) {...}"] --> three_way_comparable
 ```
 
